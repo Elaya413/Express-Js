@@ -24,7 +24,7 @@ const data =[
 const getUsers = async(req,res)=>{
    try{
     res.status(200).send({
-        data:[],
+        data,
         message:"User Data Fetch Successful"
     })
    } catch(error){
