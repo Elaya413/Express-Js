@@ -1,5 +1,7 @@
+
 const{mongodb,client} = require('../config/dbconfig')
 const sanitize = require('../common/sanitize')
+
 const userModel = require('../model/users')
 const getUsers = async(req,res)=>{
    try {
@@ -19,7 +21,7 @@ const getUsers = async(req,res)=>{
 
 const getUsersById = async(req,res)=>{
    try{
-     let userId = new mongodb.ObjectId(sanitize.isString(req.params.id))
+     let userId =(sanitize.isString(req.params.id))
      let data = await userModel.findById(userId)
       if (data)
       {
@@ -49,6 +51,10 @@ const createUser = async(req,res)=>{
       const email = sanitize.isString(req.body.email)
       const batch = sanitize.isString(req.body.batch)
       const status = sanitize.isBoolean(req.body.status)
+      //let password = sanitize.isString(req.body.password)
+
+     //password = await auth.hashPassword(password)
+
       let existingUser = await userModel.findOne({email:email})
        if(!existingUser)
        {
