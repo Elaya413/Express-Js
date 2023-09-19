@@ -1,5 +1,5 @@
 
-const{mongodb,client} = require('../config/dbconfig')
+
 const sanitize = require('../common/sanitize')
 const auth = require('../common/Auth')
 const userModel = require('../model/users')
