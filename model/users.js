@@ -26,10 +26,10 @@ const userSchema = new mongoose.Schema({
         type:String,
         required:[true,"batch is required"]
     },
-   // password:{
-   //     type:String,
-   //     required:[true,"password is required"]
-   // },
+    password:{
+        type:String,
+        required:[true,"password is required"]
+    },
     status:{
         type:Boolean,
         default:false
