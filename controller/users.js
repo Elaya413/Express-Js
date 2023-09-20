@@ -1,9 +1,4 @@
-//const sanitize = require('../common/Sanitize')
-import {isString,
-    isBoolean,
-    isArray,
-    isNumber,
-    isObject}from('../common/Sanitize')
+const sanitize = require('../common/Sanitize')
 const userModel = require('../model/users')
 const auth = require('../common/Auth')
 const getUsers = async(req,res)=>{
@@ -22,7 +17,7 @@ const getUsers = async(req,res)=>{
 }
 const getUserById =  async(req,res)=>{
     try {
-        let userId = isString(req.params.id)
+        let userId = sanitize.isString(req.params.id)
         let data = await userModel.findById(userId)
         if(data)
         {
@@ -43,12 +38,12 @@ const getUserById =  async(req,res)=>{
 
 const createUser = async(req,res)=>{
     try {
-        const firstName = isString(req.body.firstName)
-        const lastName = isString(req.body.lastName)
-        const email = isString(req.body.email)
-        const batch = isString(req.body.batch)
-        const status = isBoolean(req.body.status)
-        let password = isString(req.body.password)
+        const firstName = sanitize.isString(req.body.firstName)
+        const lastName = sanitize.isString(req.body.lastName)
+        const email = sanitize.isString(req.body.email)
+        const batch = sanitize.isString(req.body.batch)
+        const status = sanitize.isBoolean(req.body.status)
+        let password = sanitize.isString(req.body.password)
 
         password = await auth.hashPassword(password)
 
@@ -86,13 +81,13 @@ const createUser = async(req,res)=>{
 const editUserById = async(req,res)=>{
     try {
 
-        const firstName = isString(req.body.firstName)
-        const lastName = isString(req.body.lastName)
-        const email = isString(req.body.email)
-        const batch = isString(req.body.batch)
-        const status = isBoolean(req.body.status)
+        const firstName = sanitize.isString(req.body.firstName)
+        const lastName = sanitize.isString(req.body.lastName)
+        const email = sanitize.isString(req.body.email)
+        const batch = sanitize.isString(req.body.batch)
+        const status = sanitize.isBoolean(req.body.status)
 
-        let userId = isString(req.params.id)
+        let userId = sanitize.isString(req.params.id)
         let user = await userModel.findById(userId)
         if(user)
         {
@@ -122,7 +117,7 @@ const editUserById = async(req,res)=>{
 
 const deleteUserById = async(req,res)=>{
     try {
-        let userId = isString(req.params.id)
+        let userId = sanitize.isString(req.params.id)
         let data = await userModel.findById(userId)
         if(data)
         {
@@ -148,8 +143,8 @@ const deleteUserById = async(req,res)=>{
 
 const loginUser = async(req,res)=>{
     try {
-        let email = isString(req.body.email)
-        let password = isString(req.body.password)
+        let email = sanitize.isString(req.body.email)
+        let password = sanitize.isString(req.body.password)
         let user = await userModel.findOne({email:email})
         if(user)
         {   
@@ -177,8 +172,8 @@ const loginUser = async(req,res)=>{
 
 const changePassword = async(req,res)=>{
     try {
-        let userId = isString(req.params.id)
-        let password = isString(req.body.password)
+        let userId = sanitize.isString(req.params.id)
+        let password = sanitize.isString(req.body.password)
         let user = await userModel.findById(userId)
         if(user)
         {
