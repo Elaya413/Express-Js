@@ -2,17 +2,17 @@ const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const saltRound = 10;
 
-const hashPassword = async (password)=>{
+ const hashPassword = async (password)=>{
     let salt = await bcrypt.genSalt(saltRound)
     let hashedPassword = await bcrypt.hash(password,salt)
     return hashedPassword
 }
 
-const comparePassword = async (password,hashedPassword)=>{
+ const comparePassword = async (password,hashedPassword)=>{
     return bcrypt.compare(password,hashedPassword)
 }
 
-const createToken = async (payload)=>{
+ const createToken = async (payload)=>{
     const token = await jwt.sign(
         payload,
         process.env.JWT_SECRET,
@@ -22,12 +22,12 @@ const createToken = async (payload)=>{
     return token
 }
 
-const decodeToken = async(token)=>{
+ const decodeToken = async(token)=>{
     return await jwt.decode(token)
 }
 
 //middleware
-const validate = async(req,res,next)=>{
+ const validate = async(req,res,next)=>{
     try {
         let token = req?.headers?.authorization?.split(" ")[1]
         if(token)
