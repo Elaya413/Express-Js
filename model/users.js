@@ -22,17 +22,21 @@ const userSchema = new mongoose.Schema({
             message:"Invalid Email Id"
         }    
     },
-    batch:{
-        type:String,
-        required:[true,"batch is required"]
-    },
     password:{
         type:String,
         required:[true,"password is required"]
     },
+    batch:{
+        type:String,
+        required:[true,"batch is required"]
+    },
     status:{
         type:Boolean,
         default:false
+    },
+    role:{
+        type:String,
+        default:'student'
     }
 },{versionKey:false,collection:"users"})
 
