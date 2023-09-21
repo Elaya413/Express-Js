@@ -1,7 +1,7 @@
 
 const userModel = require('../model/users')
 const auth = require('../common/Auth')
-const sanitize = require('../common/Sanitize')
+const sanitize = require('../common/sanitize')
 const getUsers = async(req,res)=>{
     try {
         let data = await userModel.find()
