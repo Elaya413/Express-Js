@@ -3,15 +3,15 @@ const UsersController = require('../controller/users')
 const router = express.Router()
 const auth = require('../common/auth')
 
-router.get('/',auth.validate,auth.adminGaurd,UsersController.getUsers)
+router.get('/',auth.validate,auth.mentorGaurd,UsersController.getUsers)
 
 router.get('/:id',auth.validate, UsersController.getUserById)
 
 router.post('/',UsersController.createUser)
 
-router.put('/:id',auth.validate,auth.adminGaurd,UsersController.editUserById)
+router.put('/:id',auth.validate,auth.mentorGaurd,UsersController.editUserById)
 
-router.delete('/:id',auth.validate,auth.adminGaurd,UsersController.deleteUserById)
+router.delete('/:id',auth.validate,auth.mentorGaurd,UsersController.deleteUserById)
 
 router.post('/login',UsersController.loginUser)
 

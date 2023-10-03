@@ -51,16 +51,16 @@ const validate = async(req,res,next)=>{
     }
 }
 
-const adminGaurd = async(req,res,next)=>{
+const mentorGaurd = async(req,res,next)=>{
     try {
         let token = req?.headers?.authorization?.split(" ")[1]
         if(token)
         {
             let payload = await decodeToken(token)
-            if(payload.role === 'admin')
+            if(payload.role === 'mentor')
                 next()
             else
-                res.status(401).send({message:"Only Admin are allowed to access"})
+                res.status(401).send({message:"Only mentor are allowed to access"})
         }
         else
         {
@@ -77,5 +77,5 @@ module.exports = {
     createToken,
     decodeToken,
     validate,
-    adminGaurd
+    mentorGaurd
 }
