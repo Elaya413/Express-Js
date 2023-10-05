@@ -156,9 +156,9 @@ const loginUser = async(req,res)=>{
                 {
                     let payload = await auth.decodeToken(token)
                     if(payload.role === 'student')
-                    res.status(401).send({message:"student login successfully"}) 
+                    res.status(401).send({message:"student login successfully",token}) 
                     else
-                        res.status(401).send({message:"mentor login successfully"})
+                        res.status(401).send({message:"mentor login successfully",token})
                 }
                // res.status(200).send({message:"Login Successfull",token})
             }
