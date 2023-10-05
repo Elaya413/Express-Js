@@ -154,7 +154,7 @@ const loginUser = async(req,res)=>{
                 let token = await auth.createToken({email:user.email,role:user.role,firstName:user.firstName,lastName:user.lastName})
                 if(token)
                 {
-                    let payload = await decodeToken(token)
+                    let payload = await auth.decodeToken(token)
                     if(payload.role === 'student')
                     res.status(401).send({message:"student login successfully"}) 
                     else
