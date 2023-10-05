@@ -36,7 +36,7 @@ const userSchema = new mongoose.Schema({
     },
     role:{
         type:String,
-        default:'student'
+        default:false
     }
 },{versionKey:false,collection:"users"})
 
