@@ -1,6 +1,6 @@
 
 const userModel = require('../model/users')
-const auth = require('../common/auth')
+const auth = require('../common/Auth')
 const sanitize = require('../common/sanitize')
 const getUsers = async(req,res)=>{
     try {
@@ -152,8 +152,17 @@ const loginUser = async(req,res)=>{
             if(await auth.comparePassword(password,user.password))
             {
                 let token = await auth.createToken({email:user.email,role:user.role,firstName:user.firstName,lastName:user.lastName})
-                res.status(200).send({message:"Login Successfull",token})
+                if(token)
+                {
+                    let payload = await decodeToken(token)
+                    if(payload.role === 'mentor')
+                    res.status(401).send({message:"mentor login successfully"}) 
+                    else
+                        res.status(401).send({message:"student login successfully"})
+                }
+               // res.status(200).send({message:"Login Successfull",token})
             }
+            
             else
             {
                 res.status(400).send({message:"Invalid password"})

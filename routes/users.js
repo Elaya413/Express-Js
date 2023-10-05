@@ -1,7 +1,7 @@
 const express = require('express')
 const UsersController = require('../controller/users')
 const router = express.Router()
-const auth = require('../common/auth')
+const auth = require('../common/Auth')
 
 router.get('/',auth.validate,auth.mentorGaurd,UsersController.getUsers)
 
