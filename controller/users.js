@@ -1,6 +1,6 @@
 
 const userModel = require('../model/users')
-const auth = require('../common/Auth')
+const auth = require('../common/auth')
 const sanitize = require('../common/sanitize')
 const getUsers = async(req,res)=>{
     try {
