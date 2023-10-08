@@ -5,6 +5,7 @@ const validateEmail = (e)=>{
     return emailPattern.test(e); 
 }
 
+
 const userSchema = new mongoose.Schema({
     firstName:{
         type:String,
@@ -30,14 +31,12 @@ const userSchema = new mongoose.Schema({
         type:String,
         required:[true,"batch is required"]
     },
-    status:{
-        type:Boolean,
-        default:false
-    },
+   
     role:{
         type:String,
-        default:false
-    }
+        default:'student'
+    },
+
 },{versionKey:false,collection:"users"})
 
 const userModel = mongoose.model('users',userSchema)
