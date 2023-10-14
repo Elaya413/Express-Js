@@ -9,15 +9,15 @@ const validateEmail = (e)=>{
 const userSchema = new mongoose.Schema({
     firstName:{
         type:String,
-        required:[true,"firstName is required"]
+   
     },
     lastName:{
         type:String,
-        required:[true,"lastName is required"]
+       
     },
     email:{
         type:String,
-        required:[true,"email is required"],
+       
         validate:{
             validator:validateEmail,
             message:"Invalid Email Id"
@@ -25,17 +25,20 @@ const userSchema = new mongoose.Schema({
     },
     password:{
         type:String,
-        required:[true,"password is required"]
+       
     },
     batch:{
         type:String,
-        required:[true,"batch is required"]
+        
     },
    
     role:{
         type:String,
         default:'student'
     },
+    query:{
+        type:String
+    }
     
 
 },{versionKey:false,collection:"users"})

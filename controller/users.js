@@ -1,6 +1,6 @@
 
 const userModel = require('../model/users')
-const queryModel = require('../model/query')
+
 const auth = require('../common/auth')
 const sanitize = require('../common/sanitize')
 const getUsers = async(req,res)=>{
@@ -211,11 +211,11 @@ const changePassword = async(req,res)=>{
 
 const createquery = async(req,res)=>{
     try {
-        const name= sanitize.isString(req.body.name) 
+        const firstName= sanitize.isString(req.body.firstName) 
        
         const query = sanitize.isString(req.body.query) 
        
-             await queryModel.create({name,query})
+             await userModel.create({firstName,query})
               res.status(200).send({
                  message:"query Created Successfully"
              })
