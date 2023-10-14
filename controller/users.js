@@ -147,8 +147,8 @@ const loginUser = async(req,res)=>{
         let email = sanitize.isString(req.body.email)
         let password = sanitize.isString(req.body.password)
         let role = sanitize.isString(req.body.role)
-        let user = await userModel.findOne({email:email,role:role})
-        if(user,role)
+        let user = await userModel.findOne({email:email})
+        if(user)
         {   
             if(await auth.comparePassword(password,user.password))
             {
