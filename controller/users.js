@@ -146,11 +146,12 @@ const loginUser = async(req,res)=>{
     try {
         let email = sanitize.isString(req.body.email)
         let password = sanitize.isString(req.body.password)
-        let role = sanitize.isString(req.body.role)
-        let users = [email,role]
-        let user = await userModel.findOne({email:users})
-        if(user)
-        {  
+       let role = sanitize.isString(req.body.role)
+        let user = await userModel.findOne({email:email})
+         if(user)
+        { 
+            user.role=role
+            //await user.save()
             if(await auth.comparePassword(password,user.password))
             {
                 let token = await auth.createToken({email:user.email,role:user.role,firstName:user.firstName,lastName:user.lastName})
