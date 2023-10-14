@@ -150,14 +150,14 @@ const loginUser = async(req,res)=>{
         let user = await userModel.findOne({email:email})
          if(user)
         { 
-            user.role=role
-            await user.save()
+            
             if(await auth.comparePassword(password,user.password))
             {
                 let token = await auth.createToken({email:user.email,role:user.role,firstName:user.firstName,lastName:user.lastName})
                 if(token)
                 {
                     let payload = await auth.decodeToken(token)
+                   
                     if(payload.role === 'mentor')
                     res.status(200).send({message:"mentor login successfully",token}) 
                     else
