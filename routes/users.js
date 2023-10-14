@@ -18,6 +18,9 @@ router.post('/login',UsersController.loginUser)
 
 router.put('/change-password/:id',auth.validate,UsersController.changePassword)
 
+router.get('/createquery',auth.validate, UsersController.createquery)
+
+
 
 
 

@@ -12,6 +12,8 @@ const comparePassword = async (password,hashedPassword)=>{
     return bcrypt.compare(password,hashedPassword)
 }
 
+
+
 const createToken = async (payload)=>{
     const token = await jwt.sign(
         payload,
@@ -71,6 +73,8 @@ const mentorGaurd = async(req,res,next)=>{
         res.status(500).send({error:error.message})
     }
 }
+
+
 module.exports = {
     hashPassword,
     comparePassword,

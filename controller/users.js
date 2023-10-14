@@ -146,12 +146,13 @@ const loginUser = async(req,res)=>{
     try {
         let email = sanitize.isString(req.body.email)
         let password = sanitize.isString(req.body.password)
-        let user = await userModel.findOne({email:email})
-        if(user)
+        let role = sanitize.isString(req.body.role)
+        let user = await userModel.findOne({email:email,role:role})
+        if(user,role)
         {   
             if(await auth.comparePassword(password,user.password))
             {
-                let token = await auth.createToken({email:user.email,role:user.role,firstName:user.firstName,lastName:user.lastName,role:user.role})
+                let token = await auth.createToken({email:user.email,role:user.role,firstName:user.firstName,lastName:user.lastName})
                 if(token)
                 {
                     let payload = await auth.decodeToken(token)
@@ -205,6 +206,37 @@ const changePassword = async(req,res)=>{
     }
 }
 
+const createquery = async(req,res)=>{
+    try {
+        const firstName = sanitize.isString(req.body.firstName)
+        const query = sanitize.isString(req.body.query) 
+        let existingUser = await userModel.findOne({firstName:firstName})
+        if(!existingUser)
+        {
+             await userModel.create(
+                 {
+                     query
+                 })
+ 
+             res.status(200).send({
+                 message:"query Created Successfully"
+             })
+        }
+        else
+        {
+         res.status(400).send({
+             message:'user doesnot exits'
+         })
+        }
+     } catch (error) { 
+         res.status(500).send({
+             message:"Internal Server Error",
+             errorMessage: error.message
+         })
+     }
+ }
+
+
 module.exports={
     getUsers,
     getUserById,
@@ -212,5 +244,6 @@ module.exports={
     editUserById,
     deleteUserById,
     loginUser,
-    changePassword
+    changePassword,
+    createquery
 }
