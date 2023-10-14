@@ -1,5 +1,6 @@
 
 const userModel = require('../model/users')
+const queryModel = require('../model/query')
 const auth = require('../common/auth')
 const sanitize = require('../common/sanitize')
 const getUsers = async(req,res)=>{
@@ -210,26 +211,15 @@ const changePassword = async(req,res)=>{
 
 const createquery = async(req,res)=>{
     try {
-        const firstName = sanitize.isString(req.body.firstName)
+        const name= sanitize.isString(req.body.name) 
+       
         const query = sanitize.isString(req.body.query) 
-        let existingUser = await userModel.findOne({firstName:firstName})
-        if(!existingUser)
-        {
-             await userModel.create(
-                 {
-                     query
-                 })
- 
-             res.status(200).send({
+       
+             await queryModel.create({name,query})
+              res.status(200).send({
                  message:"query Created Successfully"
              })
-        }
-        else
-        {
-         res.status(400).send({
-             message:'user doesnot exits'
-         })
-        }
+       
      } catch (error) { 
          res.status(500).send({
              message:"Internal Server Error",

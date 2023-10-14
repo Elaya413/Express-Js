@@ -36,10 +36,7 @@ const userSchema = new mongoose.Schema({
         type:String,
         default:'student'
     },
-    query:{
-        type:String,
-        required:true
-    }
+    
 
 },{versionKey:false,collection:"users"})
 
