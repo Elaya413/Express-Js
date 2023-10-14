@@ -147,7 +147,7 @@ const loginUser = async(req,res)=>{
         let email = sanitize.isString(req.body.email)
         let password = sanitize.isString(req.body.password)
         let role = sanitize.isString(req.body.role)
-        let user = await userModel.findOne({email:email})
+        let user = await userModel.find({email:email,role:role})
         if(user)
         {   
             if(await auth.comparePassword(password,user.password))
@@ -156,12 +156,8 @@ const loginUser = async(req,res)=>{
                 if(token)
                 {
                     let payload = await auth.decodeToken(token)
-                    if(payload.role === 'mentor')
-                    res.status(200).send({message:"mentor login successfully",token}) 
-                    else
-                        res.status(200).send({message:"student login successfully",token})
-                }
-               // res.status(200).send({message:"Login Successfull",token})
+                    
+                res.status(200).send({message:"Login Successfull",token})
             }
             
             else
