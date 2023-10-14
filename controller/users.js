@@ -151,7 +151,7 @@ const loginUser = async(req,res)=>{
          if(user)
         { 
             user.role=role
-            //await user.save()
+            await user.save()
             if(await auth.comparePassword(password,user.password))
             {
                 let token = await auth.createToken({email:user.email,role:user.role,firstName:user.firstName,lastName:user.lastName})
