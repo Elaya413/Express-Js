@@ -1,4 +1,4 @@
-const mongoose = require('./index')
+const mongoose = require('mongoose')
 
 const validateEmail = (e)=>{
     var emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
@@ -35,11 +35,7 @@ const userSchema = new mongoose.Schema({
     role:{
         type:String,
         default:'student'
-    },
-    query:{
-        type:String
     }
-    
 
 },{versionKey:false,collection:"users"})
 

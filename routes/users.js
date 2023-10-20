@@ -2,7 +2,7 @@ const express = require('express')
 const UsersController = require('../controller/users')
 const router = express.Router()
 const auth = require('../common/auth')
-
+const UsersQuery = require('../controller/query')
 
 router.get('/',auth.validate,auth.mentorGaurd,UsersController.getUsers)
 
@@ -18,9 +18,13 @@ router.post('/login',UsersController.loginUser)
 
 router.put('/change-password/:id',auth.validate,UsersController.changePassword)
 
-router.post('/query', UsersController.createquery)
+router.post('/:id/createquery',UsersQuery.createquery)
 
+router.get('/:id/getquery',auth.validate,auth.mentorGaurd,UsersQuery.getquery)
 
+//router.get('/getquery/:id',auth.validate, UsersQuery .getUserById)
+
+router.post('/:id/reply',auth.mentorGaurd,UsersQuery.addReply)
 
 
 
