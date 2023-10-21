@@ -1,4 +1,4 @@
-const mongoose = require('mongoose')
+const mongoose = require('./index')
 
 const validateEmail = (e)=>{
     var emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
