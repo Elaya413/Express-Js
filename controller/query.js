@@ -16,6 +16,26 @@ const getquery = async(req,res)=>{
         })
     }
 }
+const getqueryById =  async(req,res)=>{
+    try {
+        let queryId = sanitize.isString(req.params.queryId)
+        let query = await userQuery.find({queryId:queryId})
+        if(query)
+        {
+            res.status(200).send({
+                query,
+                message:"User Data Fetch Successfull"
+            })
+        }
+        else
+            res.status(400).send({message:"Invalid User ID"})
+    } catch (error) { 
+        res.status(500).send({
+            message:"Internal Server Error",
+            errorMessage: error.message
+        })
+    }
+}
 
 //const getquery = async (req, res) => {
 //   
@@ -99,7 +119,8 @@ const addReply = async (req, res) => {
 
 module.exports={
      createquery, 
-     getquery, 
+     getquery,
+     getqueryById,
      addReply
      }
 

@@ -22,9 +22,9 @@ router.post('/:id/createquery',UsersQuery.createquery)
 
 router.get('/:id/getquery',auth.validate,auth.mentorGaurd,UsersQuery.getquery)
 
-//router.get('/getquery/:id',auth.validate, UsersQuery .getUserById)
+router.get('/:queryId/getquerybyid', auth.validate,UsersQuery.getqueryById)
 
-router.post('/:id/reply',auth.mentorGaurd,UsersQuery.addReply)
+router.post('/:id/reply',UsersQuery.addReply)
 
 
 
