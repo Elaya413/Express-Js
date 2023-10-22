@@ -24,13 +24,13 @@ const querySchema =  new mongoose.Schema({
         type: Date,
         default: new Date().getTime()
     },
-    replies: {
+   
         reply: {
             type: String,
             default:"UNASSIGNED",
         }, 
       
-    }, 
+   
    
 }, {
     
