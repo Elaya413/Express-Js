@@ -37,34 +37,6 @@ const getqueryById =  async(req,res)=>{
     }
 }
 
-//const getquery = async (req, res) => {
-//   
-//    try {
-//        const id =sanitize.isString(req.params.id)
-//        console.log(id)
-//        if (id) {
-//            let query = await userQuery.findById({id:id}).sort({ createdAt: 'desc' });
-//
-//
-//            let replies = query?.map((query) => {
-//                return query?.replies?.length >= 0 ? query?.replies?.reverse() : []
-//            })
-//
-//            //comment.replies || []
-//            let newquery = [...query, replies]
-//                .slice(0, replies?.length);
-//
-//            console.log('new query----------', newquery);
-//
-//            res.json(newquery);
-//        } else {
-//            res.status(404).json({ message: 'There is no user to get the query', error: error });
-//        }
-//
-//    } catch (error) {
-//        res.status(401).json({ message: 'Problem with Getting query From Server', error: error });
-//    }
-//}
 const createquery = async (req, res) => {
    
   
@@ -75,8 +47,8 @@ const createquery = async (req, res) => {
            await userQuery.create({
             queryId:id,
             username: req.body?.username,
-            query: req.body?.query
-                
+            query: req.body?.query,
+             reply:req.body?.reply   
             })
 
             res.status(201).send({ message:"query created Successfully"})
@@ -114,6 +86,40 @@ const addReply = async (req, res) => {
         res.status(401).json({ message: 'Problem with Getting query From Server', error: error });
     }
 }
+const editqueryById = async(req,res)=>{
+    try {
+
+        const username = sanitize.isString(req.body.username)
+        const query = sanitize.isString(req.body.query)
+        const reply = sanitize.isString(req.body.reply)
+       let userId = sanitize.isString(req.params.id)
+        let user = await userQuery.findById(userId)
+        console.log(userId)
+        if(user)
+        {
+            // bad approach await userModel.updateOne({_id: userId},{$set:{firstName,lastName,email,batch,status}})
+            //suggested approach
+            user.username = username
+            user.query = query
+            user.reply = reply
+           
+          
+            await user.save()
+
+            res.status(200).send({
+                message:"User Data Edited Successfully"
+            })
+        }
+        else
+            res.status(400).send({message:"Invalid User ID"})
+        
+    } catch (error) { 
+        res.status(500).send({
+            message:"Internal Server Error",
+            errorMessage: error.message
+        })
+    }
+}
 
 
 
@@ -121,7 +127,8 @@ module.exports={
      createquery, 
      getquery,
      getqueryById,
-     addReply
+     addReply,
+     editqueryById
      }
 
 

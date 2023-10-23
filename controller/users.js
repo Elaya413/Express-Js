@@ -88,7 +88,7 @@ const editUserById = async(req,res)=>{
         const email = sanitize.isString(req.body.email)
         const batch = sanitize.isString(req.body.batch)
         const status = sanitize.isBoolean(req.body.status)
-        const query = sanitize.isstring(req.body.query)
+    
         let userId = sanitize.isString(req.params.id)
         let user = await userModel.findById(userId)
         if(user)
@@ -100,7 +100,7 @@ const editUserById = async(req,res)=>{
             user.email = email
             user.batch = batch
             user.status = status
-            user.query = query
+          
             await user.save()
 
             res.status(200).send({

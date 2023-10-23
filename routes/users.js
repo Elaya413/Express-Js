@@ -10,9 +10,9 @@ router.get('/:id',auth.validate, UsersController.getUserById)
 
 router.post('/',UsersController.createUser)
 
-router.put('/:id',auth.validate,auth.mentorGaurd,UsersController.editUserById)
+router.put('/:id',UsersController.editUserById)
 
-router.delete('/:id',auth.validate,auth.mentorGaurd,UsersController.deleteUserById)
+router.delete('/:id',auth.validate,UsersController.deleteUserById)
 
 router.post('/login',UsersController.loginUser)
 
@@ -24,7 +24,7 @@ router.get('/:id/getquery',auth.validate,auth.mentorGaurd,UsersQuery.getquery)
 
 router.get('/:queryId/getquerybyid', auth.validate,UsersQuery.getqueryById)
 
-router.post('/:id/reply',UsersQuery.addReply)
+router.post('/:queryId/editquerybyid',UsersQuery.editqueryById)
 
 
 

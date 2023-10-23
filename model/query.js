@@ -27,7 +27,8 @@ const querySchema =  new mongoose.Schema({
    
         reply: {
             type: String,
-            default:"UNASSIGNED",
+            enum: ["unassgined",'assigned','closed'],
+           default:"unassgined"
         }, 
       
    
